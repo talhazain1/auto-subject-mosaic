@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Auto Subject Mosaic</title>
+</head>
+<body>
+    <h1>Auto Subject Mosaic (No Manual Mask)</h1>
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <p>
+            <label>Choose an image:</label>
+            <input type="file" name="image_file" accept="image/*" required>
+        </p>
+        <p>
+            <label>Subject Radius (finer detail):</label>
+            <input type="number" name="radius_subject" value="10" min="3" max="100">
+        </p>
+        <p>
+            <label>Background Radius (bigger tiles):</label>
+            <input type="number" name="radius_background" value="30" min="5" max="200">
+        </p>
+        <p>
+            <label>Outline Thickness:</label>
+            <input type="number" name="outline_thickness" value="2" min="1" max="10">
+        </p>
+        <p>
+            <label>Smoothing (0=none, e.g. 1=rounded edges):</label>
+            <input type="number" step="0.5" name="smoothing" value="0" min="0" max="5">
+        </p>
+        <p>
+            <label>Sharpen Final Mosaic?</label>
+            <input type="checkbox" name="sharpen" value="true" checked>
+        </p>
+
+        <button type="submit">Generate Mosaic</button>
+    </form>
+
+    {% if mosaic_path %}
+        <h2>Resulting Mosaic</h2>
+        <img src="{{ mosaic_path }}" alt="Mosaic" style="max-width:80%; border:1px solid #ccc;">
+        <br><br>
+        <a href="{{ outline_path }}" download>Download SVG Outlines</a>
+    {% endif %}
+</body>
+</html>
